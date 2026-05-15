@@ -1,31 +1,26 @@
 class Solution {
 public:
-    void bfs(vector<vector<int>>& rooms, vector<bool>& visited, int i) {
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        int n = rooms.size();
+        vector<int> vis(n, 0);
+        vis[0] = 1;
         queue<int> q;
-        q.push(i);
-        visited[i] = true;
-        
-        while (!q.empty()) {
-            int curr = q.front();
+        q.push(0);
+
+        while (!q.empty()){
+            int top = q.front();
             q.pop();
-            
-            for (auto i : rooms[curr]) {
-                if (!visited[i]) {
-                    visited[i] = true;
+            for (auto& i : rooms[top]) {
+                if (!vis[i]) {
+                    vis[i] = 1;
                     q.push(i);
                 }
             }
         }
-    }
-    bool canVisitAllRooms(vector<vector<int>>& rooms) {
-        int n = rooms.size();
-        vector<bool> visited(n,false);
         
-        bfs(rooms,visited,0);
-
-        for (auto i : visited){
-            if (!i) return false;
+        for (int i = 0; i < n; i++) {
+            if (!vis[i]) return 0;
         }
-        return true;
+        return 1;
     }
 };
