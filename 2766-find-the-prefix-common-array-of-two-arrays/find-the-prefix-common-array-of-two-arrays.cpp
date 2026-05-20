@@ -2,14 +2,16 @@ class Solution {
 public:
     vector<int> findThePrefixCommonArray(vector<int>& A, vector<int>& B) {
         int n = A.size();
-        vector<int> seenA(n+1, 0), seenB(n+1, 0), C(n);
-        int cnt = 0;
-
+        vector<int> idx(n+1);
         for (int i = 0; i < n; i++) {
-            if (++seenA[A[i]] == 1 && seenB[A[i]] == 1) cnt++;
-            if (++seenB[B[i]] == 1 && seenA[B[i]] == 1) cnt++;
-            C[i] = cnt;
+            idx[A[i]] = i;
         }
-        return C;
+        for (int i = 0; i < n; i++) {
+            if (i > idx[B[i]]) idx[B[i]] = i;
+        }
+        vector<int> pre(n);
+        for (int i = 1; i <= n; i++) pre[idx[i]]++;
+        for (int i = 1; i < n; i++) pre[i] += pre[i-1];
+        return pre;
     }
 };
