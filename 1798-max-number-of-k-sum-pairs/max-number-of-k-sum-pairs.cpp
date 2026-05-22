@@ -1,21 +1,17 @@
 class Solution {
 public:
     int maxOperations(vector<int>& nums, int k) {
+        int i = 0, j = nums.size()-1;
         sort(nums.begin(), nums.end());
-        int l = 0, r = nums.size()-1;
-        int cnt = 0;
-
-        while (l < r){
-            if (nums[l] + nums[r] == k){
-                cnt++;
-                l++, r--;
+        int ans = 0;
+        while (i < j) {
+            if (nums[i] + nums[j] == k) {
+                ans++;
+                i++, j--;
             }
-            else if (nums[l] + nums[r] < k){
-                l++;
-            }
-            else r--;
+            else if (nums[i] + nums[j] < k) i++;
+            else j--;
         }
-
-        return cnt;
+        return ans;
     }
 };
