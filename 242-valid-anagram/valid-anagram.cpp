@@ -5,10 +5,10 @@ public:
         for (int i = 0; i < s.size(); i++) {
             freq[s[i]-'a']++;
         }
-        for (auto i : t) {
+        for (auto& i : t) {
             freq[i-'a']--;
         }
-        for (auto i : freq){
+        for (auto& i : freq){
             if (i != 0) return false;
         }
         return true;
