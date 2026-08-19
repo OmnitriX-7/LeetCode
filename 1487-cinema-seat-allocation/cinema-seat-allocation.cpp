@@ -1,7 +1,7 @@
 class Solution {
 public:
     int maxNumberOfFamilies(int n, vector<vector<int>>& reservedSeats) {
-        map<int, set<int>> mp;
+        unordered_map<int, unordered_set<int>> mp;
         for (int i = 0; i < reservedSeats.size(); i++) {
             mp[reservedSeats[i][0]].insert(reservedSeats[i][1]);
         }
@@ -10,7 +10,7 @@ public:
         int ans = 2*n;
 
         for (auto& i : mp) {
-            set<int> st = i.second;
+            unordered_set<int> st = i.second;
             int l = 0, r = 0;
             if (st.count(2) || st.count(3) || st.count(4) || st.count(5)) {
                 ans--; l = 1;
